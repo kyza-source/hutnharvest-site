@@ -1,0 +1,305 @@
+/* Organic design system tokens, ported from the Claude Design bundle's
+   _ds/organic-.../styles.css. Fonts are loaded via next/font in layout.tsx,
+   which supplies --font-heading / --font-body on <html>. */
+
+:root {
+  --color-bg: #f5ead8;
+  --color-surface: #ebddc5;
+  --color-text: #201e1d;
+  --color-accent: #c67139;
+  --color-accent-2: #7a8a5e;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+
+  --color-neutral-100: #f9f4ed;
+  --color-neutral-200: #eee7db;
+  --color-neutral-300: #dcd3c4;
+  --color-neutral-400: #c0b6a5;
+  --color-neutral-500: #a19786;
+  --color-neutral-600: #82796a;
+  --color-neutral-700: #645c50;
+  --color-neutral-800: #474238;
+  --color-neutral-900: #2e2b25;
+
+  --color-accent-100: #fff2eb;
+  --color-accent-200: #ffe1d0;
+  --color-accent-300: #ffc6a5;
+  --color-accent-400: #f6a06b;
+  --color-accent-500: #d67f48;
+  --color-accent-600: #b2622d;
+  --color-accent-700: #8c491a;
+  --color-accent-800: #643312;
+  --color-accent-900: #402310;
+
+  --color-accent-2-100: #f0fae1;
+  --color-accent-2-200: #e1eecc;
+  --color-accent-2-300: #ccdbb2;
+  --color-accent-2-400: #aebf92;
+  --color-accent-2-500: #8fa073;
+  --color-accent-2-600: #728157;
+  --color-accent-2-700: #56633f;
+  --color-accent-2-800: #3d472b;
+  --color-accent-2-900: #272e1b;
+
+  --font-heading-weight: 400;
+
+  --space-1: 4.4px;
+  --space-2: 8.8px;
+  --space-3: 13.2px;
+  --space-4: 17.6px;
+  --space-6: 26.4px;
+  --space-8: 35.2px;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2e2b25 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2e2b25 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2e2b25 22%, transparent);
+}
+
+* ,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: var(--font-heading-weight);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-2);
+}
+
+p {
+  margin: 0 0 var(--space-3);
+}
+
+a {
+  color: var(--color-accent);
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: var(--color-accent-700);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+/* — segmented control (Books Health Check "how should we reach you") — */
+.seg {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+}
+.seg-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.seg-opt + .seg-opt {
+  border-left: 1px solid var(--color-divider);
+}
+.seg-opt:has(input:checked) {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+.seg-opt:not(:has(input:checked)):hover {
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+}
+.seg-opt:has(input:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+.seg-opt input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* — site chrome: header / footer — */
+.nav-link {
+  font-size: 14px;
+  color: var(--color-text);
+  text-decoration: none;
+}
+.nav-link:hover {
+  color: var(--color-accent);
+}
+.nav-link-active {
+  font-size: 14px;
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 2px;
+}
+.cta-pill {
+  display: inline-block;
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 13px;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  padding: 11px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cta-pill:hover {
+  background: var(--color-accent-600);
+  color: var(--color-bg);
+}
+.footer-link {
+  color: var(--color-bg);
+  text-decoration: none;
+  font-size: 14px;
+}
+.footer-link:hover {
+  color: var(--color-accent-400);
+}
+.footer-link-muted {
+  color: color-mix(in srgb, var(--color-bg) 85%, transparent);
+  text-decoration: none;
+}
+.footer-link-muted:hover {
+  color: var(--color-accent-400);
+}
+
+.resource-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.resource-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* — buttons used at hero/CTA/pricing scale — */
+.btn-pill {
+  display: inline-block;
+  text-align: center;
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 999px;
+  cursor: pointer;
+  border: none;
+}
+.btn-pill-primary {
+  color: var(--color-bg);
+  background: var(--color-accent);
+}
+.btn-pill-primary:hover {
+  background: var(--color-accent-600);
+  color: var(--color-bg);
+}
+.btn-pill-outline {
+  color: var(--color-text);
+  background: transparent;
+  border: 1.5px solid color-mix(in srgb, var(--color-text) 30%, transparent);
+}
+.btn-pill-outline:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+/* — form fields (pill inputs matching the reviewed prototype) — */
+.field-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.field-input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+  border-radius: 999px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: inherit;
+}
+.field-input:hover {
+  border-color: color-mix(in srgb, var(--color-text) 40%, transparent);
+}
+textarea.field-input {
+  border-radius: 20px;
+  padding: 10px 14px;
+  resize: vertical;
+}
+
+/* — responsive layout helpers — */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.container-narrow {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (max-width: 860px) {
+  .grid-collapse,
+  .hero-grid,
+  .stats-grid,
+  .testimonials-grid,
+  .delivered-grid,
+  .pricing-grid,
+  .resources-grid,
+  .health-grid,
+  .contact-grid,
+  .form-row-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
