@@ -48,13 +48,29 @@ const CHANNELS: { key: ContactMethod; enabled: boolean; label: string }[] = [
 export default function HealthCheckForm() {
   const [state, setState] = useState<FormState>(INITIAL_STATE);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setState((s) => ({ ...s, [key]: value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/health-check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(state),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   if (submitted) {
@@ -261,12 +277,20 @@ export default function HealthCheckForm() {
         />
       </div>
 
+      {error && (
+        <p style={{ fontSize: 13, color: "var(--color-accent-700)", margin: 0 }}>
+          Something went wrong submitting this — please try again, or email
+          us directly at info@hutnharvest.com.
+        </p>
+      )}
+
       <button
         type="submit"
+        disabled={sending}
         className="btn-pill btn-pill-primary"
-        style={{ marginTop: 4, fontSize: 14, padding: "15px 20px", width: "100%" }}
+        style={{ marginTop: 4, fontSize: 14, padding: "15px 20px", width: "100%", opacity: sending ? 0.6 : 1 }}
       >
-        Request My Books Health Check
+        {sending ? "Submitting…" : "Request My Books Health Check"}
       </button>
     </form>
   );
