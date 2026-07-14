@@ -111,7 +111,12 @@ export default function Footer() {
             Follow
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <a href="#" className="footer-link">
+            <a
+              href="https://www.instagram.com/thehuttttttt/"
+              target="_blank"
+              rel="noreferrer"
+              className="footer-link"
+            >
               Instagram
             </a>
           </div>

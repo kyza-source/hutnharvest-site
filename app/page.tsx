@@ -139,26 +139,12 @@ export default function HomePage() {
           }}
         >
           <Image
-            src="/images/hero-before-after.png"
-            alt="Abstract illustration of messy, scattered notes becoming a clean, organized list"
+            src="/images/hero-bookkeeping.png"
+            alt="Bookkeeping illustration — a desk with a computer, calculator, and financial reports"
             fill
             style={{ objectFit: "cover" }}
             priority
           />
-          <div
-            style={{
-              position: "absolute",
-              bottom: 12,
-              right: 12,
-              fontSize: 11,
-              color: "var(--color-text)",
-              background: "color-mix(in srgb, var(--color-bg) 85%, transparent)",
-              padding: "4px 10px",
-              borderRadius: 999,
-            }}
-          >
-            Placeholder — swap for a real photo
-          </div>
         </div>
       </section>
 

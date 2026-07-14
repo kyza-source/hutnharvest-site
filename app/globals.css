@@ -205,6 +205,13 @@ img {
   color: var(--color-accent-400);
 }
 
+.mailto-link {
+  text-decoration: none;
+}
+.mailto-link:hover {
+  text-decoration: underline;
+}
+
 .resource-card {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }

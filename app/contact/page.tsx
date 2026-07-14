@@ -126,7 +126,11 @@ export default function ContactPage() {
             >
               Email
             </div>
-            <a href="mailto:info@hutnharvest.com" style={{ fontSize: 15, color: "var(--color-text)", textDecoration: "none" }}>
+            <a
+              href="mailto:info@hutnharvest.com"
+              className="mailto-link"
+              style={{ fontSize: 15, color: "var(--color-text)" }}
+            >
               info@hutnharvest.com
             </a>
           </div>
