@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { sendMail } from "@/lib/mailer";
 
 const ENTITY_LABELS: Record<string, string> = {
   llc: "LLC",
@@ -62,22 +62,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Name and email are required." }, { status: 400 });
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL;
   const to = process.env.CONTACT_TO_EMAIL || "info@hutnharvest.com";
 
-  if (!apiKey || !from) {
-    console.error(
-      "Books Health Check submission received, but RESEND_API_KEY / RESEND_FROM_EMAIL is not configured.",
-      body
-    );
-    return NextResponse.json({ error: "Email delivery is not configured yet." }, { status: 500 });
-  }
-
   try {
-    const resend = new Resend(apiKey);
-    const { error } = await resend.emails.send({
-      from,
+    await sendMail({
       to,
       replyTo: email,
       subject: `New Books Health Check request from ${name}`,
@@ -101,11 +89,6 @@ export async function POST(request: Request) {
         .filter((line) => line !== null)
         .join("\n"),
     });
-
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json({ error: "Failed to send submission." }, { status: 502 });
-    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {
